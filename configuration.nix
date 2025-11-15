@@ -108,7 +108,29 @@
 	vim
 	git
 	vscode-fhs
+  grim slurp wl-clipboard
+  wofi
+    # dev
+    nodejs
+    python3
+    # tools
+    p7zip
+    obs-studio
+    vlc
+    audacity
+    #blender
+    renderdoc
+    #notepad-plus-plus
+    spotify
+    steam
+    lutris
   ];
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+    WLR_NO_HARDWARE_CURSORS = "1"; # lagging mouse in virtualbox for hyprland
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
