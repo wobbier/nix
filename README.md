@@ -1,132 +1,172 @@
-============================================================
-NIX
-============================================================
-This file contains all steps required after installing NixOS
-to restore your full setup including:
-- 1Password SSH agent
-- GitHub SSH access
-- Cloning your NixOS config repo
-- Linking /etc/nixos → ~/nix
-- Generating hardware config
-- Rebuilding system (with Home Manager auto-integration)
-============================================================
+```text
+██████╗  █████╗ ███╗   ██╗██╗  ██╗████████╗ █████╗ ███╗   ██╗██╗  ██╗
+██╔══██╗██╔══██╗████╗  ██║██║ ██╔╝╚══██╔══╝██╔══██╗████╗  ██║██║ ██╔╝
+██   ██║███████║██╔██╗ ██║█████╔╝    ██║   ███████║██╔██╗ ██║█████╔╝ 
+██╔══██║██╔══██║██║╚██╗██║██╔═██╗    ██║   ██╔══██║██║╚██╗██║██╔═██╗ 
+██████╔╝██║  ██║██║ ╚████║██║  ██╗   ██║   ██║  ██║██║ ╚████║██║  ██╗
+╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝
+```
 
+# 🧊 NixOS Fresh Install 😎
 
-------------------------------------------------------------
-1) ENABLE 1PASSWORD AND SSH AGENT
-------------------------------------------------------------
+This guide explains how to restore your entire NixOS setup after a fresh install — fast, clean, and reproducibly.
 
-# Install 1Password GUI + CLI for initial setup (temporary)
+It covers:
+
+- 🔐 1Password SSH agent  
+- 🔑 GitHub SSH access  
+- 📁 Cloning your Nix config repo  
+- 🔗 Linking `/etc/nixos` → `~/nix`  
+- 🖥️ Generating hardware config  
+- 🛠️ Rebuilding system  
+- 🏠 Home Manager auto-integration  
+- 🧹 Chrome profile lock fix  
+- 🔧 SSH host key fixes
+
+---
+
+## 🥷 1) Enable 1Password & SSH Agent
+
+Install 1Password GUI + CLI (one-time during bootstrap):
+
+```bash
 nix-shell -p _1password _1password-gui
+```
 
-# Start 1Password (GUI or CLI)
-# Ensure “Developer → Use the 1Password SSH Agent” is enabled.
+Open 1Password → **Settings → Developer**  
+Enable:
 
-# Verify SSH_AUTH_SOCK exists:
+✔ Use the 1Password SSH Agent
+
+Check the agent:
+
+```bash
 echo $SSH_AUTH_SOCK
+```
 
-# Verify GitHub SSH key is available through 1Password:
+Check GitHub SSH key is recognized:
+
+```bash
 ssh-add -l
-# You should see your key (ED25519)
+```
 
-# If not signed in yet:
+If not signed in:
+
+```bash
 eval $(op signin)
+```
 
+---
 
-------------------------------------------------------------
-2) CLONE YOUR NIXOS CONFIG REPO
-------------------------------------------------------------
+## 📥 2) Clone Your NixOS Config Repo
 
+```bash
 cd ~
 git clone git@github.com:YOUR_USERNAME/YOUR_REPO_NAME.git nix
+```
 
-# Test GitHub SSH access if needed:
+Verify GitHub SSH:
+
+```bash
 ssh -T git@github.com
+```
 
+---
 
-------------------------------------------------------------
-3) LINK THE REPO TO /etc/nixos
-------------------------------------------------------------
+## 🔗 3) Link Repo to `/etc/nixos`
 
-# Remove default config:
+Remove default system config:
+
+```bash
 sudo rm -rf /etc/nixos
+```
 
-# Symlink your repo:
+Symlink your repo:
+
+```bash
 sudo ln -s ~/nix /etc/nixos
+```
 
-# Confirm:
+Verify:
+
+```bash
 ls -l /etc/nixos
+```
 
+---
 
-------------------------------------------------------------
-4) GENERATE HARDWARE CONFIG
-------------------------------------------------------------
+## ⚙️ 4) Generate Hardware Configuration
 
-# This generates machine-specific hardware-configuration.nix
-# It will appear inside ~/nix because of the symlink.
-/etc/nixos -> ~/nix
-
+```bash
 sudo nixos-generate-config
+```
 
-# IMPORTANT:
-# hardware-configuration.nix is intentionally gitignored.
-# Each machine keeps its own version.
+This generates your machine-specific:
 
+```
+~/nix/hardware-configuration.nix
+```
 
-------------------------------------------------------------
-5) REBUILD THE SYSTEM
-------------------------------------------------------------
+⚠️ This file is gitignored — each machine keeps its own version.
 
+---
+
+## 🛠️ 5) Rebuild the System
+
+```bash
 cd ~/nix
 sudo nixos-rebuild switch
+```
 
-# This applies:
-# - host-specific config
-# - common modules
-# - users/mitch.nix
-# - Home Manager activation (via fetchTarball)
-# - all system + home packages
+This applies:
 
+- 🖥️ Host config  
+- 📦 Shared modules  
+- 👤 users/mitch.nix  
+- 🏠 Home Manager (auto via fetchTarball)  
+- 🔧 All system + home packages  
 
-------------------------------------------------------------
-6) (OPTIONAL) CHROME PROFILE LOCK FIX
-------------------------------------------------------------
+---
 
-# If Chrome refuses to start after hostname changes
-# Example error:
-# "The profile appears to be in use by another computer (nixos)"
+## 🧼 6) (Optional) Chrome Profile Lock Fix
 
+If Chrome refuses to start or says:
+
+> "The profile appears to be in use by another computer (nixos)"
+
+Fix:
+
+```bash
 rm ~/.config/google-chrome/Singleton*
+```
 
-# Relaunch Chrome normally.
+Relaunch Chrome.
 
+---
 
-------------------------------------------------------------
-7) (OPTIONAL) RESET SSH HOST KEYS
-------------------------------------------------------------
+## 🔧 7) (Optional) Reset SSH Host Keys
 
-# Only needed if the SSH server breaks.
-/etc/ssh/ssh_host_* might need removal for regenerated keys.
+If SSH server breaks or complains:
 
+```bash
 sudo rm /etc/ssh/ssh_host_*
 sudo systemctl restart sshd
+```
 
+---
 
-------------------------------------------------------------
-8) DONE!
-------------------------------------------------------------
+## 🎉 8) Done!
 
-Your system should now be fully restored with:
-- NixOS system config
-- Home Manager user config
-- Desktop environment
-- Packages + settings
-- 1Password SSH agent
-- GitHub access
-- Hardware config
-- Hostname
-- Full repo-linked configuration
+Your system is now fully restored:
 
-============================================================
-END OF FILE
-============================================================
+- 🧊 NixOS system config  
+- 🏠 Home Manager environment  
+- 🖥️ Desktop environment  
+- 📦 System + user packages  
+- 🔐 1Password SSH agent  
+- 🔑 GitHub SSH working  
+- 💻 Hardware config loaded  
+- 🧑‍💻 Hostname + modules  
+- 🔗 Repo-linked configuration  
+
+Your machine is officially **DankTank™ Certified** 💪🔥
