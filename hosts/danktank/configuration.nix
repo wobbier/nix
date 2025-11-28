@@ -10,11 +10,11 @@
   ########################################
   imports = [
     ./hardware-configuration.nix    # machine-specific, gitignored
-    ../../users/mitch.nix           # user module
+    ../../modules/common.nix        # shared config for all machines
   ];
 
   ########################################
-  # Boot
+  # Boot (host-specific)
   ########################################
   boot.loader.grub = {    
     enable = true;
@@ -30,124 +30,12 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   ########################################
-  # Networking
+  # Networking (host-specific bits)
   ########################################
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
-
-  ########################################
-  # Locale & Time
-  ########################################
-  time.timeZone = "America/Toronto";
-  i18n.defaultLocale = "en_CA.UTF-8";
+  networking.hostName = "nixos"; # you can later rename this to "danktank"
 
   ########################################
-  # Display Server / Desktop Environments
-  ########################################
-  services.xserver.enable = true;
-
-  # Display Manager
-  services.xserver.displayManager.gdm.enable = true;
-
-  # Desktop Environments
-  services.desktopManager.plasma6.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-
-  # Keyboard layout
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  ########################################
-  # Printing
-  ########################################
-  services.printing.enable = true;
-
-  ########################################
-  # Audio (PipeWire)
-  ########################################
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-  };
-
-  ########################################
-  # Users
-  ########################################
-  # User accounts are defined in ../../users/mitch.nix (and future users).
-
-  ########################################
-  # Login / Session
-  ########################################
-  services.displayManager.autoLogin.enable = false;
-
-  ########################################
-  # Core Programs
-  ########################################
-  programs.firefox.enable = true;
-  programs.steam.enable = true;
-
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-
-  programs.waybar.enable = true;
-
-  programs._1password.enable = true;
-  programs._1password-gui = {
-    enable = true;
-    polkitPolicyOwners = [ "mitch" ];
-  };
-
-  programs.ssh.startAgent = true;
-
-  ########################################
-  # System Packages
-  ########################################
-  nixpkgs.config.allowUnfree = true;
-
-  environment.systemPackages = with pkgs; [
-    # essentials
-    vim
-    git
-    vscode-fhs
-
-    # utilities
-    sbctl
-    discord
-    mangohud
-    grim slurp wl-clipboard
-    wofi
-    p7zip
-
-    # media
-    obs-studio
-    vlc
-    audacity
-    spotify
-
-    # dev
-    nodejs
-    python3
-    renderdoc
-
-    # gaming
-    steam
-    lutris
-
-    # web browser
-    google-chrome
-  ];
-
-  ########################################
-  # Graphics (OpenGL / Nvidia)
+  # Graphics (OpenGL / Nvidia) — host-specific
   ########################################
   hardware.graphics.enable = true;
 
@@ -181,13 +69,7 @@
   };
 
   ########################################
-  # Firewall / Networking (optional)
-  ########################################
-  # services.openssh.enable = true;
-  # networking.firewall.enable = false;
-
-  ########################################
-  # System State Version
+  # System State Version (host-specific)
   ########################################
   system.stateVersion = "25.05"; # Did you read the comment?
 }
