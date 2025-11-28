@@ -1,108 +1,109 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# NixOS system configuration
+# Host: nixos
+# Role: personal desktop / gaming workstation
 
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-  # --install-bootloader when building the first time
-  # Bootloader.
+  ########################################
+  # Imports
+  ########################################
+  imports = [
+    ./hardware-configuration.nix  # machine-specific, gitignored
+  ];
+
+  ########################################
+  # Boot
+  ########################################
   boot.loader.grub = {    
     enable = true;
     efiSupport = true;
     devices = [ "nodev" ];
     useOSProber = true;
-    #signed = true;
   };
 
-  boot.loader.systemd-boot.enable = false; # can maybe remove?
+  boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Use latest kernel.
+  # Latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
+  ########################################
+  # Networking
+  ########################################
+  networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
+  ########################################
+  # Locale & Time
+  ########################################
   time.timeZone = "America/Toronto";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
+  ########################################
+  # Display Server / Desktop Environments
+  ########################################
   services.xserver.enable = true;
 
+  # Display Manager
   services.xserver.displayManager.gdm.enable = true;
-  #services.displayManager.sdmm.enable = false;
 
-  # Enable the KDE Plasma Desktop Environment.
-  #services.xserver.desktopManager.gnome.enable = true;
-  #services.displayManager.sddm.enable = true;
+  # Desktop Environments
   services.desktopManager.plasma6.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
-  # Configure keymap in X11
+  # Keyboard layout
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
 
-  # Enable CUPS to print documents.
+  ########################################
+  # Printing
+  ########################################
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
+  ########################################
+  # Audio (PipeWire)
+  ########################################
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+
   services.pipewire = {
     enable = true;
+    pulse.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  ########################################
+  # Users
+  ########################################
   users.users.mitch = {
     isNormalUser = true;
     description = "Mitch Andrews";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       kdePackages.kate
-    #  thunderbird
     ];
   };
 
-  # Enable automatic login for the user.
+  ########################################
+  # Login / Session
+  ########################################
   services.displayManager.autoLogin.enable = false;
-  #services.displayManager.autoLogin.user = "mitch";
 
-  # Install firefox.
+  ########################################
+  # Core Programs
+  ########################################
   programs.firefox.enable = true;
   programs.steam.enable = true;
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
+
   programs.waybar.enable = true;
 
   programs._1password.enable = true;
@@ -113,51 +114,52 @@
 
   programs.ssh.startAgent = true;
 
-  # Allow unfree packages
+  ########################################
+  # System Packages
+  ########################################
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-    sbctl
-    discord
-    mangohud
+    # essentials
     vim
     git
     vscode-fhs
+
+    # utilities
+    sbctl
+    discord
+    mangohud
     grim slurp wl-clipboard
     wofi
-    # dev
-    nodejs
-    python3
-    # tools
     p7zip
+
+    # media
     obs-studio
     vlc
     audacity
-    #blender
-    renderdoc
-    #notepad-plus-plus
     spotify
+
+    # dev
+    nodejs
+    python3
+    renderdoc
+
+    # gaming
     steam
     lutris
+
+    # web browser
     google-chrome
-    #chatgpt unsupported atm
   ];
 
-  # Enable OpenGL
-  hardware.graphics = {
-    enable = true;
-  };
+  ########################################
+  # Graphics (OpenGL / Nvidia)
+  ########################################
+  hardware.graphics.enable = true;
 
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
-
-    # Modesetting is required.
     modesetting.enable = true;
 
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
@@ -179,13 +181,14 @@
     open = false;
 
     # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
+	  # accessible via `nvidia-settings`.
     nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
+  ########################################
+  # Firewall / Networking (optional)
+  ########################################
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -205,6 +208,9 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+  ########################################
+  # System State Version
+  ########################################
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -212,5 +218,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }
