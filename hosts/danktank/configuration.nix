@@ -9,8 +9,8 @@
   # Imports
   ########################################
   imports = [
-    ./hardware-configuration.nix    # machine-specific, gitignored
-    ../../modules/common.nix        # shared config for all machines
+    ../../hardware-configuration.nix  # machine-specific, gitignored at repo root
+    ../../modules/common.nix          # shared config for all machines
   ];
 
   ########################################
@@ -32,7 +32,7 @@
   ########################################
   # Networking (host-specific bits)
   ########################################
-  networking.hostName = "nixos"; # you can later rename this to "danktank"
+  networking.hostName = "nixos"; # later we can rename this to "danktank"
 
   ########################################
   # Graphics (OpenGL / Nvidia) — host-specific
