@@ -120,4 +120,9 @@
     # web browser
     google-chrome
   ];
+
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+  };
 }
