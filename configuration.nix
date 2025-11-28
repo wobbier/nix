@@ -9,11 +9,21 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-
+  # --install-bootloader when building the first time
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.grub = {    
+    enable = true;
+    efiSupport = true;
+    devices = [ "nodev" ];
+    useOSProber = true;
+    #signed = true;
+  };
+
+  boot.loader.systemd-boot.enable = false; # can maybe remove?
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Use latest kernel.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -35,8 +45,12 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
+  services.xserver.displayManager.gdm.enable = true;
+  #services.displayManager.sdmm.enable = false;
+
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
+  #services.xserver.desktopManager.gnome.enable = true;
+  #services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
@@ -80,13 +94,15 @@
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = false;
-  services.displayManager.autoLogin.user = "mitch";
+  #services.displayManager.autoLogin.user = "mitch";
 
   # Install firefox.
   programs.firefox.enable = true;
   programs.steam.enable = true;
-
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
   programs.waybar.enable = true;
 
   programs._1password.enable = true;
@@ -94,6 +110,8 @@
     enable = true;
     polkitPolicyOwners = [ "mitch" ];
   };
+
+  programs.ssh.startAgent = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -103,13 +121,14 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-	discord
-	mangohud
-	vim
-	git
-	vscode-fhs
-  grim slurp wl-clipboard
-  wofi
+    sbctl
+    discord
+    mangohud
+    vim
+    git
+    vscode-fhs
+    grim slurp wl-clipboard
+    wofi
     # dev
     nodejs
     python3
@@ -124,12 +143,47 @@
     spotify
     steam
     lutris
+    google-chrome
+    #chatgpt unsupported atm
   ];
 
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    MOZ_ENABLE_WAYLAND = "1";
-    WLR_NO_HARDWARE_CURSORS = "1"; # lagging mouse in virtualbox for hyprland
+  # Enable OpenGL
+  hardware.graphics = {
+    enable = true;
+  };
+
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware.nvidia = {
+
+    # Modesetting is required.
+    modesetting.enable = true;
+
+    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    # Enable this if you have graphical corruption issues or application crashes after waking
+    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
+    # of just the bare essentials.
+    powerManagement.enable = false;
+
+    # Fine-grained power management. Turns off GPU when not in use.
+    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+    powerManagement.finegrained = false;
+
+    # Use the NVidia open source kernel module (not to be confused with the
+    # independent third-party "nouveau" open source driver).
+    # Support is limited to the Turing and later architectures. Full list of 
+    # supported GPUs is at: 
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+    # Only available from driver 515.43.04+
+    open = false;
+
+    # Enable the Nvidia settings menu,
+	# accessible via `nvidia-settings`.
+    nvidiaSettings = true;
+
+    # Optionally, you may need to select the appropriate driver version for your specific GPU.
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   # Some programs need SUID wrappers, can be configured further or are
