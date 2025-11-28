@@ -10,6 +10,7 @@
   ########################################
   imports = [
     ./hardware-configuration.nix  # machine-specific, gitignored
+    ./users/mitch.nix             # user module
   ];
 
   ########################################
@@ -79,14 +80,7 @@
   ########################################
   # Users
   ########################################
-  users.users.mitch = {
-    isNormalUser = true;
-    description = "Mitch Andrews";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    ];
-  };
+  # User accounts are defined in ./users/mitch.nix (and future users).
 
   ########################################
   # Login / Session
