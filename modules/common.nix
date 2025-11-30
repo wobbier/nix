@@ -121,8 +121,13 @@
     google-chrome
   ];
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
+
+  ########################################
+  # Security
+  ########################################
+  security.pam.services.sddm.enableKwallet = true;
 }
