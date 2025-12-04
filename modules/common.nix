@@ -28,9 +28,13 @@
 
   # Display Manager
   services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
 
   # Desktop Environments
-  services.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6 = {
+    enable = true;
+  };
+  services.displayManager.defaultSession = "hyprland";
   # services.xserver.desktopManager.gnome.enable = true;
 
   # Keyboard layout
@@ -55,12 +59,15 @@
     pulse.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
+    wireplumber.enable = true;
   };
 
   ########################################
   # Login / Session (shared)
   ########################################
   services.displayManager.autoLogin.enable = false;
+  # Electron flags
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   ########################################
   # Core Programs (shared)
@@ -93,6 +100,8 @@
     vim
     git
     vscode-fhs
+    hyprpaper
+    wallust
 
     # utilities
     sbctl
@@ -101,6 +110,9 @@
     grim slurp wl-clipboard
     wofi
     p7zip
+    dunst
+    hyprpolkitagent
+    emote
 
     # media
     obs-studio
@@ -112,13 +124,24 @@
     nodejs
     python3
     renderdoc
+    dotnet-sdk
+    gnumake
+    libgcc
+    gcc
+    cmake
+    zlib
+    smartgit
+    steam-run
+    libGLU
 
     # gaming
     steam
     lutris
+    wowup-cf
 
     # web browser
     google-chrome
+    bottles-unwrapped
   ];
 
   hardware.graphics = {
@@ -130,4 +153,12 @@
   # Security
   ########################################
   security.pam.services.sddm.enableKwallet = true;
+
+
+  /*
+  steam-run ../bx/tools/bin/linux/genie \
+  --with-tools --with-combined-examples --with-shared-lib \
+  --gcc=linux-gcc \
+  gmake
+  */
 }
