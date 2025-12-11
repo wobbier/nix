@@ -25,4 +25,6 @@ in
 
   # Wire Mitch's home config
   home-manager.users.mitch = import ./home/mitch.nix;
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }

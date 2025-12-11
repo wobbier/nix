@@ -128,16 +128,49 @@
     gnumake
     libgcc
     gcc
-    cmake
     zlib
     smartgit
     steam-run
-    libGLU
+    autoconf
+    cmakeWithGui
+
+    # engine dev
+    # bgfx
+    libGLU # is this needed from having libGL?
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXext
+    xorg.libXrandr
+    xorg.libXinerama
+    xorg.libXxf86vm
+    xorg.libXfixes
+    xorg.libxcb
+    xorg.xorgproto
+    vulkan-loader
+    vulkan-headers
+    pkg-config
+
+    #SDL -- move to own flake?
+    SDL2
+    wayland
+    wayland-protocols
+    wayland-scanner
+    libxkbcommon
+    libGL
+    mesa
+    libdrm
+
+    alsa-lib
+    pulseaudio
+    pipewire
+    jack2
 
     # gaming
     steam
     lutris
     wowup-cf
+    runescape
+    runelite
 
     # web browser
     google-chrome
@@ -154,7 +187,9 @@
   ########################################
   security.pam.services.sddm.enableKwallet = true;
 
-
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssl-1.1.1w"
+  ];
   /*
   steam-run ../bx/tools/bin/linux/genie \
   --with-tools --with-combined-examples --with-shared-lib \
