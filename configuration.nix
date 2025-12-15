@@ -15,6 +15,12 @@ in
     (import "${home-manager}/nixos")  # Home Manager NixOS module
     ./hosts/danktank/configuration.nix
   ];
+  
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
   ########################################
   # Home Manager configuration entries

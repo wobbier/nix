@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   ########################################
@@ -19,6 +19,18 @@
     htop
     btop
   ];
+
+  home.activation.mySymlinks = lib.mkAfter ''
+    rm -rf ${config.home.homeDirectory}/.config/hypr
+    ln -sfn ${config.home.homeDirectory}/nix/hypr ${config.home.homeDirectory}/.config/hypr
+  '';
+
+  xdg.configFile."waybar/config.jsonc".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/waybar/config.jsonc";
+
+  xdg.configFile."waybar/style.css".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/waybar/style.css";
+
 
   # Example shell config you can expand later
   programs.bash.enable = true;

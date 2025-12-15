@@ -134,6 +134,9 @@
     autoconf
     cmakeWithGui
 
+    # gamedev
+    unityhub
+    
     # engine dev
     # bgfx
     libGLU # is this needed from having libGL?
