@@ -34,16 +34,13 @@
   xdg.configFile."mako/config".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/mako/config";
 
+  xdg.configFile."wofi/config".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/wofi/config";
 
-  # Optional: keep wofi styling in your repo like your waybar setup
-  #xdg.configFile."wofi/config".source =
-  #  config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/wofi/config";
+  xdg.configFile."wofi/style.css".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/wofi/style.css";
 
-  #xdg.configFile."wofi/style.css".source =
-  #  config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/wofi/style.css";
-
-
-  # Example shell config you can expand later
+  # Shell
   programs.bash.enable = true;
   # programs.zsh.enable = true;
   programs.kitty.enable = true;
