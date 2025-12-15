@@ -103,6 +103,12 @@
     hyprpaper
     wallust
 
+    # notifications
+    mako
+
+    # login screen
+    swaylock
+
     # utilities
     sbctl
     discord
@@ -110,7 +116,6 @@
     grim slurp wl-clipboard
     wofi
     p7zip
-    dunst
     hyprpolkitagent
     emote
 
