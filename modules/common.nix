@@ -115,7 +115,7 @@
     discord
     mangohud
     grim slurp wl-clipboard
-    wofi
+    rofi
     p7zip
     hyprpolkitagent
     emote
