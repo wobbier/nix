@@ -23,6 +23,9 @@
   home.activation.mySymlinks = lib.mkAfter ''
     rm -rf ${config.home.homeDirectory}/.config/hypr
     ln -sfn ${config.home.homeDirectory}/nix/hypr ${config.home.homeDirectory}/.config/hypr
+
+    rm -rf ${config.home.homeDirectory}/.config/wallust
+    ln -sfn ${config.home.homeDirectory}/nix/config/wallust ${config.home.homeDirectory}/.config/wallust
   '';
 
   xdg.configFile."waybar/config.jsonc".source =

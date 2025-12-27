@@ -185,6 +185,9 @@
     # web browser
     google-chrome
     bottles-unwrapped
+
+    # rice
+    swww # swap to awww when you flake your shit
   ];
 
   hardware.graphics = {
