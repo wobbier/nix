@@ -26,14 +26,11 @@
 
     rm -rf ${config.home.homeDirectory}/.config/wallust
     ln -sfn ${config.home.homeDirectory}/nix/config/wallust ${config.home.homeDirectory}/.config/wallust
+
+    rm -rf ${config.home.homeDirectory}/.config/waybar
+    ln -sfn ${config.home.homeDirectory}/nix/config/waybar ${config.home.homeDirectory}/.config/waybar
   '';
 
-  xdg.configFile."waybar/config.jsonc".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/waybar/config.jsonc";
-
-  xdg.configFile."waybar/style.css".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/waybar/style.css";
-    
   xdg.configFile."mako/config".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/mako/config";
 
