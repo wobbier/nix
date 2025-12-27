@@ -102,6 +102,7 @@
     vscode-fhs
     hyprpaper
     wallust
+    nerd-fonts.jetbrains-mono
 
     # notifications
     mako
@@ -118,6 +119,7 @@
     p7zip
     hyprpolkitagent
     emote
+    fastfetch
 
     # media
     obs-studio
