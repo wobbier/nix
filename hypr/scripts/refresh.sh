@@ -7,10 +7,10 @@ for _prs in "${_ps[@]}"; do
     fi
 done
 
-#ags quit # unneeded?
-
 sleep 0.3
 waybar &
+
+# kitty @ set-colors --all --configured ~/.config/kitty/colors-kitty.conf
 
 # relaunch notification daemon
 

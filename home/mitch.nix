@@ -32,6 +32,9 @@
 
     rm -rf ${config.home.homeDirectory}/.config/rofi
     ln -sfn ${config.home.homeDirectory}/nix/config/rofi ${config.home.homeDirectory}/.config/rofi
+
+    rm -rf ${config.home.homeDirectory}/.config/kitty
+    ln -sfn ${config.home.homeDirectory}/nix/config/kitty ${config.home.homeDirectory}/.config/kitty
   '';
 
   xdg.configFile."mako/config".source =
