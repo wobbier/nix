@@ -29,6 +29,9 @@
 
     rm -rf ${config.home.homeDirectory}/.config/waybar
     ln -sfn ${config.home.homeDirectory}/nix/config/waybar ${config.home.homeDirectory}/.config/waybar
+
+    rm -rf ${config.home.homeDirectory}/.config/rofi
+    ln -sfn ${config.home.homeDirectory}/nix/config/rofi ${config.home.homeDirectory}/.config/rofi
   '';
 
   xdg.configFile."mako/config".source =
