@@ -49,5 +49,5 @@
   # Shell
   programs.bash.enable = true;
   # programs.zsh.enable = true;
-  programs.kitty.enable = true;
+  # programs.kitty.enable = true; # so this removes my shit cause it's in home, move my dotfiles to here
 }

@@ -103,6 +103,10 @@
     hyprpaper
     wallust
     nerd-fonts.jetbrains-mono
+    pavucontrol
+    pamixer
+    libnotify
+    kitty
 
     # notifications
     mako
