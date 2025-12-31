@@ -103,10 +103,13 @@
     hyprpaper
     wallust
     nerd-fonts.jetbrains-mono
-    pavucontrol
-    pamixer
     libnotify
     kitty
+
+    # audio
+    pavucontrol
+    pamixer
+    playerctl
 
     # notifications
     mako
