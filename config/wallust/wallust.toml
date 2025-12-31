@@ -55,4 +55,4 @@ rofi.template = 'colors-rofi.rasi'
 rofi.target = '~/.config/rofi/wallust/colors-rofi.rasi'
 
 kitty.template = 'colors-kitty.conf'
-kitty.target = '~/.config/kitty/colors-kitty.conf'
+kitty.target = '~/.config/kitty/wallust/colors-kitty.conf'
