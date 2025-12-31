@@ -46,7 +46,7 @@ check_contrast = true
 # zathura = { template = 'zathura', target = '~/.config/zathura/zathurarc' }
 
 hypr.template = 'colors-hyprland.conf'
-hypr.target = '~/.config/hypr/wallust/wallust-hyprland.conf'
+hypr.target = '~/.config/hypr/wallust/colors-hyprland.conf'
 
 waybar.template = 'colors-waybar.css'
 waybar.target = '~/.config/waybar/wallust/colors-waybar.css'
