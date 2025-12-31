@@ -64,3 +64,5 @@ yarn-error.log*
 *.hm-bak
 
 wallust/colors-*.*
+
+.current_wallpaper
