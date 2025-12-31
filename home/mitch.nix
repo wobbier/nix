@@ -35,16 +35,13 @@
 
     rm -rf ${config.home.homeDirectory}/.config/kitty
     ln -sfn ${config.home.homeDirectory}/nix/config/kitty ${config.home.homeDirectory}/.config/kitty
+
+    rm -rf ${config.home.homeDirectory}/.config/btop
+    ln -sfn ${config.home.homeDirectory}/nix/config/btop ${config.home.homeDirectory}/.config/btop
   '';
 
   xdg.configFile."mako/config".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/mako/config";
-
-  xdg.configFile."wofi/config".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/wofi/config";
-
-  xdg.configFile."wofi/style.css".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/wofi/style.css";
 
   # Shell
   programs.bash.enable = true;
