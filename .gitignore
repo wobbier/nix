@@ -17,7 +17,6 @@
 # ---------------------------------
 # Nix / NixOS
 # ---------------------------------
-hardware-configuration.nix
 result
 result-*
 *.drv

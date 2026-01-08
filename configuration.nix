@@ -1,11 +1,9 @@
 # Root NixOS configuration dispatcher + Home Manager integration
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
-  # Pin Home Manager 25.05 as a tarball
-  home-manager = builtins.fetchTarball
-    "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+  home-manager = inputs.home-manager; # needed?
 in
 {
   ########################################
@@ -13,7 +11,6 @@ in
   ########################################
   imports = [
     (import "${home-manager}/nixos")  # Home Manager NixOS module
-    ./hosts/danktank/configuration.nix
   ];
   
   nix.gc = {
