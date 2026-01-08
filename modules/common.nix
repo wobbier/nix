@@ -198,6 +198,10 @@
     swww # swap to awww when you flake your shit
   ];
 
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+  users.users.mitch.extraGroups = [ "libvirtd" "kvm" ];
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -211,6 +215,12 @@
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"
   ];
+
+  networking.extraHosts = ''
+    10.88.111.20 nucc
+    10.88.111.20 deluge.mitch.gg
+  '';
+
   /*
   steam-run ../bx/tools/bin/linux/genie \
   --with-tools --with-combined-examples --with-shared-lib \
