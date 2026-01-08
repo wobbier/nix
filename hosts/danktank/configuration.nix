@@ -67,6 +67,44 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
+  security.polkit.enable = true;
+
+  fileSystems."/mnt/windows/Programs" = {
+    device = "/dev/disk/by-uuid/98644EC9644EA9B8";
+    fsType = "ntfs3";
+    options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
+  };
+
+  fileSystems."/mnt/windows/Tankhouse" = {
+    device = "/dev/disk/by-uuid/48E221F9E221EBBE";
+    fsType = "ntfs3";
+    options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
+  };
+
+  fileSystems."/mnt/windows/WOB" = {
+    device = "/dev/disk/by-uuid/7A6AA2086AA1C0ED";
+    fsType = "ntfs3";
+    options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
+  };
+
+  fileSystems."/mnt/windows/DNA" = {
+    device = "/dev/disk/by-uuid/FC7CB12C7CB0E296";
+    fsType = "ntfs3";
+    options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
+  };
+
+  fileSystems."/mnt/windows/WinNVME1" = {
+    device = "/dev/disk/by-uuid/9CC44BA5C44B810E";
+    fsType = "ntfs3";
+    options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
+  };
+
+  fileSystems."/mnt/windows/WinNVME2" = {
+    device = "/dev/disk/by-uuid/34FCC9BFFCC97B9C";
+    fsType = "ntfs3";
+    options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
+  };
+
   ########################################
   # Firewall / Networking (optional)
   ########################################

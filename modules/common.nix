@@ -106,6 +106,7 @@
     nerd-fonts.jetbrains-mono
     libnotify
     kitty
+    kdePackages.polkit-kde-agent-1
 
     # audio
     pavucontrol
@@ -187,8 +188,8 @@
     steam
     lutris
     wowup-cf
-    runescape
     runelite
+    bolt-launcher
 
     # web browser
     google-chrome
