@@ -16,5 +16,13 @@
         ./hardware-configuration.nix
       ];
     };
+    nixosConfigurations.virtualdank = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./configuration.nix
+        ./hosts/virtualdank/configuration.nix
+        ./hardware-configuration.nix
+      ];
+    };
   };
 }
