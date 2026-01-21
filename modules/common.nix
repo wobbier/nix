@@ -102,6 +102,9 @@
     # essentials
     vim
     git
+    lazygit
+    fzf
+    ripgrep
     hyprpaper
     wallust
     nerd-fonts.jetbrains-mono
@@ -150,7 +153,6 @@
     libgcc
     gcc
     zlib
-    gitkraken
     steam-run
     autoconf
     cmakeWithGui
