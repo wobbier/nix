@@ -44,7 +44,38 @@
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/mako/config";
 
   # Shell
+  programs.ssh = {
+    matchBlocks."*" = {
+      extraOptions.IdentityAgent = "~/.1password/agent.sock";
+    };
+  };
   programs.bash.enable = true;
   # programs.zsh.enable = true;
   # programs.kitty.enable = true; # so this removes my shit cause it's in home, move my dotfiles to here
+  services.gammastep = {
+    enable = true;
+
+    dawnTime = "6:00-7:45";
+    duskTime = "18:35-20:15";
+
+    temperature = {
+      day = 5500;
+      night = 2500;
+    };
+
+    tray = true;
+    enableVerboseLogging = true;
+
+    settings = {
+      general = {
+        adjustment-method = "wayland";
+        location-provider = "manual";
+      };
+
+      manual = {
+        lat = 43.6532;
+        lon = -79.3832;
+      };
+    };
+  };
 }

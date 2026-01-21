@@ -57,7 +57,9 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
+    audio.enable = true;
     alsa.enable = true;
+    jack.enable = true;
     alsa.support32Bit = true;
     wireplumber.enable = true;
   };
@@ -89,7 +91,7 @@
   };
 
   services.openssh.enable = true;
-  programs.ssh.startAgent = true;
+  services.flatpak.enable = true;
 
   ########################################
   # System Packages (shared)
@@ -100,13 +102,13 @@
     # essentials
     vim
     git
-    vscode-fhs
     hyprpaper
     wallust
     nerd-fonts.jetbrains-mono
     libnotify
     kitty
     kdePackages.polkit-kde-agent-1
+    gammastep
 
     # audio
     pavucontrol
@@ -129,14 +131,17 @@
     hyprpolkitagent
     emote
     fastfetch
+    wlvncc
 
     # media
     obs-studio
     vlc
     audacity
     spotify
+    plex-desktop
 
     # dev
+    vscode-fhs
     nodejs
     python3
     renderdoc
@@ -145,29 +150,34 @@
     libgcc
     gcc
     zlib
-    smartgit
+    gitkraken
     steam-run
     autoconf
     cmakeWithGui
+    blender
 
     # gamedev
     unityhub
 
     alsa-lib
     pulseaudio
-    pipewire
     jack2
 
     # gaming
     steam
     lutris
     wowup-cf
-    runelite
-    bolt-launcher
+    bolt-launcher # runescape
 
     # web browser
     google-chrome
     bottles-unwrapped
+
+    # work
+    openconnect
+    openconnect_openssl
+    parsec-bin
+    slack
 
     # rice
     swww # swap to awww when you flake your shit
@@ -181,7 +191,7 @@
     enable = true;
     enable32Bit = true;
   };
-
+  
   ########################################
   # Security
   ########################################
@@ -194,6 +204,8 @@
   networking.extraHosts = ''
     10.88.111.20 nucc
     10.88.111.20 deluge.mitch.gg
+    10.88.111.20 plex.mitch.gg
+    10.88.111.20 open.mitch.gg
   '';
 
   /*
