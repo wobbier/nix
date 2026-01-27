@@ -38,6 +38,9 @@
 
     rm -rf ${config.home.homeDirectory}/.config/btop
     ln -sfn ${config.home.homeDirectory}/nix/config/btop ${config.home.homeDirectory}/.config/btop
+
+    rm -rf ${config.home.homeDirectory}/.config/wlogout
+    ln -sfn ${config.home.homeDirectory}/nix/config/wlogout ${config.home.homeDirectory}/.config/wlogout
   '';
 
   xdg.configFile."mako/config".source =

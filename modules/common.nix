@@ -117,6 +117,8 @@
     pavucontrol
     pamixer
     playerctl
+    wlogout
+    hyprlock
 
     # notifications
     mako
