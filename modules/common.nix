@@ -27,8 +27,8 @@
   services.xserver.enable = true;
 
   # Display Manager
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
+  services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.wayland = true;
 
   # Desktop Environments
   services.desktopManager.plasma6 = {
@@ -105,26 +105,23 @@
     lazygit
     fzf
     ripgrep
-    hyprpaper
     wallust
     nerd-fonts.jetbrains-mono
     libnotify
     kitty
-    kdePackages.polkit-kde-agent-1
     gammastep
 
     # audio
     pavucontrol
     pamixer
     playerctl
-    wlogout
-    hyprlock
 
     # notifications
     mako
 
-    # login screen
-    swaylock
+    # lock screen
+    wlogout
+    hyprlock
 
     # utilities
     sbctl
@@ -152,20 +149,13 @@
     renderdoc
     dotnet-sdk
     gnumake
-    libgcc
     gcc
-    zlib
-    steam-run
     autoconf
     cmakeWithGui
     blender
 
     # gamedev
     unityhub
-
-    alsa-lib
-    pulseaudio
-    jack2
 
     # gaming
     steam

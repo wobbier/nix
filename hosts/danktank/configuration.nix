@@ -37,7 +37,16 @@
   ########################################
   # Graphics (OpenGL / Nvidia)
   ########################################
-  hardware.graphics.enable = true;
+  
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+      libva
+      libvdpau
+    ];
+  };
+  
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
