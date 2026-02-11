@@ -110,6 +110,7 @@
     libnotify
     kitty
     gammastep
+    flameshot
 
     # audio
     pavucontrol
@@ -134,6 +135,7 @@
     emote
     fastfetch
     wlvncc
+    caligula # iso burning
 
     # media
     obs-studio

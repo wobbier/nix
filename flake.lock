@@ -68,21 +68,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1769359455,
-        "narHash": "sha256-ufNKEQGA0ertpWWO2giSawQBafZ3mQnlxHsmjbMKA00=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "c65409508878d63185ee476dc35d43124e4304e2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "dolphin-overlay": "dolphin-overlay",
@@ -93,14 +78,16 @@
     },
     "warcraftlogs": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1769359912,
-        "narHash": "sha256-GjddVw72Eu9lpkRpr3tO2NI2pVIHjReMcwce64swcek=",
+        "lastModified": 1770800370,
+        "narHash": "sha256-7TRSdd/t+Bl+3lqC+7tyNW/ucqzrq6PiG585rXYCbc4=",
         "owner": "wobbier",
         "repo": "warcraftlogs-nixos",
-        "rev": "b21a9084dede123ec5f6d22a9c39e00eaf352470",
+        "rev": "5bf1232d7966eff30ec22d814f1706cb599b0d67",
         "type": "github"
       },
       "original": {
