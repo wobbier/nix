@@ -1,5 +1,5 @@
 # Common configuration shared by all machines (desktop + laptop)
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   ########################################
@@ -90,8 +90,19 @@
     polkitPolicyOwners = [ "mitch" ];
   };
 
+  programs.thunderbird.enable = true;
+
   services.openssh.enable = true;
   services.flatpak.enable = true;
+
+  programs.spicetify =
+  let
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  in
+  {
+    enable = true;
+    theme = spicePkgs.themes.defaultDynamic;
+  };
 
   ########################################
   # System Packages (shared)
@@ -141,7 +152,6 @@
     obs-studio
     vlc
     audacity
-    spotify
     plex-desktop
 
     # dev

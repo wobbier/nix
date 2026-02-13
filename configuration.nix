@@ -11,6 +11,7 @@ in
   ########################################
   imports = [
     (import "${home-manager}/nixos")  # Home Manager NixOS module
+    inputs.spicetify-nix.nixosModules.default
   ];
   
   nix.gc = {

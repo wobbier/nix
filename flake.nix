@@ -8,6 +8,8 @@
     dolphin-overlay.url = "github:rumboon/dolphin-overlay";
     warcraftlogs.url = "github:wobbier/warcraftlogs-nixos";
     warcraftlogs.inputs.nixpkgs.follows = "nixpkgs";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, dolphin-overlay, warcraftlogs, ... } @ inputs:
