@@ -122,6 +122,7 @@
     kitty
     gammastep
     flameshot
+    hyprpicker
 
     # audio
     pavucontrol

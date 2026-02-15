@@ -20,20 +20,18 @@ button {
 }
 
 button:focus {
-    background-size: 50%;
+    background-size: contain;
 	border: 0px;
 	outline-style: none;
-
 }
 
 button:hover {
     background-color: transparent; 
     color: @color13;
-    background-size: 50%;
+    background-size: contain;
     margin: 30px;
     border-radius: 80px;
     outline-style: none;
-	
 }
 
 /* Adjust the size of the icon or content inside the button */
