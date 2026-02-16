@@ -2,8 +2,11 @@
 # Host: dankbook
 # Role: MacBook Pro 14,3
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+
+in
 {
   ########################################
   # Imports
@@ -11,6 +14,7 @@
   imports = [
     ../../hardware-configuration.nix
     ../../modules/common.nix
+    ./modules/sound.nix
   ];
 
   ########################################
@@ -24,7 +28,8 @@
   ########################################
   # Kernel
   ########################################
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_6;
+
 
   ########################################
   # Hostname
@@ -45,9 +50,8 @@
   ];
 
   ########################################
-  # Power tweaks (optional but recommended)
+  # Power tweaks
   ########################################
-  services.tlp.enable = true;
   powerManagement.enable = true;
 
   ########################################

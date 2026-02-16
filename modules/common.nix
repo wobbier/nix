@@ -112,7 +112,6 @@
   environment.systemPackages = with pkgs; [
     # essentials
     vim
-    git
     lazygit
     fzf
     ripgrep

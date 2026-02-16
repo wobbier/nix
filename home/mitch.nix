@@ -20,6 +20,17 @@
     btop
   ];
 
+  programs.git = {
+    enable = true;
+    settings = {
+      user = {
+        name = "Mitch Andrews";
+        email = "rastaninja77@gmail.com";
+      };
+    };
+  };
+
+
   home.activation.mySymlinks = lib.mkAfter ''
     rm -rf ${config.home.homeDirectory}/.config/hypr
     ln -sfn ${config.home.homeDirectory}/nix/hypr ${config.home.homeDirectory}/.config/hypr
