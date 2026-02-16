@@ -45,6 +45,30 @@
       ];
     };
 
+    nixosConfigurations.dankbook = nixpkgs.lib.nixosSystem {
+      inherit system;
+
+      specialArgs = {
+        inherit inputs;
+      };
+
+      modules = [
+        ./configuration.nix
+        ./hosts/dankbook/configuration.nix
+        ./hardware-configuration.nix
+
+        {
+          environment.systemPackages = [
+            warcraftlogs.packages.${system}.warcraftlogs
+          ];
+
+          nixpkgs.overlays = [
+            dolphin-overlay.overlays.default
+          ];
+        }
+      ];
+    };
+
     nixosConfigurations.virtualdank = nixpkgs.lib.nixosSystem {
       inherit system;
 

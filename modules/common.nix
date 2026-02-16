@@ -123,6 +123,7 @@
     gammastep
     flameshot
     hyprpicker
+    localsend
 
     # audio
     pavucontrol
@@ -214,6 +215,9 @@
     10.88.111.20 plex.mitch.gg
     10.88.111.20 open.mitch.gg
   '';
+  
+  networking.firewall.allowedTCPPorts = [ 53317 ];
+  networking.firewall.allowedUDPPorts = [ 53317 ];
 
   /*
   steam-run ../bx/tools/bin/linux/genie \
