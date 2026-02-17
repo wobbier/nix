@@ -15,6 +15,7 @@ in
     ../../hardware-configuration.nix
     ../../modules/common.nix
     ./modules/sound.nix
+    ./modules/touchbar.nix
   ];
 
   ########################################
@@ -29,7 +30,6 @@ in
   # Kernel
   ########################################
   boot.kernelPackages = pkgs.linuxPackages_6_6;
-
 
   ########################################
   # Hostname

@@ -25,10 +25,12 @@
 	"group/motherboard",
 	//"custom/separator#blank_2",
 	"group/laptop",
+	"group/network",
 	//"custom/separator#blank_2",
 	"group/audio",
 	//"custom/separator#blank_2",
 	"tray",
+	"battery",
 	"custom/power",
 	],
 
