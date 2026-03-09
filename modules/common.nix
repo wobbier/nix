@@ -172,13 +172,13 @@
 
     # gaming
     steam
-    lutris
+    #lutris
     wowup-cf
     bolt-launcher # runescape
 
     # web browser
     google-chrome
-    bottles-unwrapped
+    #bottles-unwrapped
 
     # work
     openconnect

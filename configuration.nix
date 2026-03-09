@@ -30,5 +30,10 @@ in
   # Wire Mitch's home config
   home-manager.users.mitch = import ./home/mitch.nix;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    max-substitution-jobs = 16;
+    cores = 0;
+    max-jobs = "auto";
+  };
 }

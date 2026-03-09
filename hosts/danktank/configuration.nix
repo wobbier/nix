@@ -34,6 +34,12 @@
   ########################################
   networking.hostName = "danktank";
 
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    r8125
+  ];
+
+  boot.blacklistedKernelModules = [ "r8169" ];
+
   ########################################
   # Graphics (OpenGL / Nvidia)
   ########################################
