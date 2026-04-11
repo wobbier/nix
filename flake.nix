@@ -8,11 +8,13 @@
     dolphin-overlay.url = "github:rumboon/dolphin-overlay";
     warcraftlogs.url = "github:wobbier/warcraftlogs-nixos";
     warcraftlogs.inputs.nixpkgs.follows = "nixpkgs";
+    archon.url = "github:wobbier/archon-nix";
+    archon.inputs.nixpkgs.follows = "nixpkgs";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, dolphin-overlay, warcraftlogs, ... } @ inputs:
+  outputs = { self, nixpkgs, dolphin-overlay, warcraftlogs, archon, spicetify-nix, ... } @ inputs:
   let
     system = "x86_64-linux";
 
@@ -36,6 +38,7 @@
         {
           environment.systemPackages = [
             warcraftlogs.packages.${system}.warcraftlogs
+            archon.packages.${system}.archon
           ];
 
           nixpkgs.overlays = [

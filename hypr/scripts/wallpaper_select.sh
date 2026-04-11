@@ -5,7 +5,7 @@ scriptsDir="$HOME/.config/hypr/scripts"
 
 # variables
 focused_monitor=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
-# swww transition config
+# awww transition config
 FPS=240
 TYPE="any"
 DURATION=2
@@ -16,17 +16,17 @@ mapfile -d '' PICS < <(find "${wallpaperDir}" -type f \( -iname "*.jpg" -o -inam
 
 RANDOM_PIC="${PICS[$((RANDOM % ${#PICS[@]}))]}"
 
-swww query || swww-daemon --format xrgb
+awww query || awww-daemon --format xrgb
 
-swww img -o "$focused_monitor" "$RANDOM_PIC" $SWWW_PARAMS
+awww img -o "$focused_monitor" "$RANDOM_PIC" $SWWW_PARAMS
 echo "$focused_monitor" "\"$RANDOM_PIC\"" $SWWW_PARAMS
 sleep 0.5
 
 #wallust run $RANDOM_PIC
 
 
-# Define the path to the swww cache directory
-cache_dir="$HOME/.cache/swww/"
+# Define the path to the awww cache directory
+cache_dir="$HOME/.cache/awww/"
 
 # Get a list of monitor outputs
 monitor_outputs=($(ls "$cache_dir"))

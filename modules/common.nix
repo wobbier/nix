@@ -169,6 +169,8 @@
 
     # gamedev
     unityhub
+    godot-mono
+    unrar
 
     # gaming
     steam
@@ -186,11 +188,17 @@
     parsec-bin
     slack
 
+    # virt
+    virtiofsd
+
     # rice
-    swww # swap to awww when you flake your shit
+    awww
   ];
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.swtpm.enable = true;
+  };
   programs.virt-manager.enable = true;
   users.users.mitch.extraGroups = [ "libvirtd" "kvm" ];
 
