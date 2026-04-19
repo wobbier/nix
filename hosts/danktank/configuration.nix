@@ -16,7 +16,7 @@
   ########################################
   # Boot
   ########################################
-  boot.loader.grub = {    
+  boot.loader.grub = {
     enable = true;
     efiSupport = true;
     devices = [ "nodev" ];

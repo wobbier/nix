@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    dolphin-overlay.url = "github:rumboon/dolphin-overlay";
+    #dolphin-overlay.url = "github:rumboon/dolphin-overlay";
     warcraftlogs.url = "github:wobbier/warcraftlogs-nixos";
     warcraftlogs.inputs.nixpkgs.follows = "nixpkgs";
     archon.url = "github:wobbier/archon-nix";
@@ -14,7 +14,7 @@
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, dolphin-overlay, warcraftlogs, archon, spicetify-nix, ... } @ inputs:
+  outputs = { self, nixpkgs, warcraftlogs, archon, spicetify-nix, ... } @ inputs: #dolphin-overlay, 
   let
     system = "x86_64-linux";
 
@@ -41,9 +41,9 @@
             archon.packages.${system}.archon
           ];
 
-          nixpkgs.overlays = [
-            dolphin-overlay.overlays.default
-          ];
+          ##nixpkgs.overlays = [
+          ##  dolphin-overlay.overlays.default
+          ##];
         }
       ];
     };
@@ -65,9 +65,9 @@
             warcraftlogs.packages.${system}.warcraftlogs
           ];
 
-          nixpkgs.overlays = [
-            dolphin-overlay.overlays.default
-          ];
+          #nixpkgs.overlays = [
+          #  dolphin-overlay.overlays.default
+          #];
         }
       ];
     };

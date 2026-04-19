@@ -104,6 +104,16 @@
     theme = spicePkgs.themes.defaultDynamic;
   };
 
+  #programs.vesktop = { #home config?
+  #  enable = true;
+  #  settings = {
+  #    splashTheming = false;
+  #    staticTitle = true;
+  #    hardwareAcceleration = true;
+  #    discordBranch = "stable";
+  #  };
+  #};
+
   ########################################
   # System Packages (shared)
   ########################################
@@ -123,6 +133,7 @@
     flameshot
     hyprpicker
     localsend
+    vesktop #discord client
 
     # audio
     pavucontrol
@@ -138,7 +149,6 @@
 
     # utilities
     sbctl
-    discord
     mangohud
     grim slurp wl-clipboard
     rofi
@@ -195,6 +205,26 @@
     awww
   ];
 
+  ########################################
+  # Screen Sharing
+  ########################################
+  xdg.portal = {
+    enable = true;
+
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+    ];
+
+    config = {
+      common = {
+        default = [ "hyprland" ];
+      };
+    };
+  };
+
+  ########################################
+  # Virtualisation
+  ########################################
   virtualisation.libvirtd = {
     enable = true;
     qemu.swtpm.enable = true;
