@@ -14,6 +14,7 @@
   ########################################
   # Hostname is host-specific; set that in hosts/*/configuration.nix
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   ########################################
   # Locale & Time (shared)
@@ -247,10 +248,10 @@
   ];
 
   networking.extraHosts = ''
-    10.88.111.20 nucc
-    10.88.111.20 deluge.mitch.gg
-    10.88.111.20 plex.mitch.gg
-    10.88.111.20 open.mitch.gg
+    192.168.18.16 nucc
+    192.168.18.16 deluge.mitch.gg
+    192.168.18.16 plex.mitch.gg
+    192.168.18.16 open.mitch.gg
   '';
   
   networking.firewall.allowedTCPPorts = [ 53317 ];

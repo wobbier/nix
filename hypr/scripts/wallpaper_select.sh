@@ -1,69 +1,54 @@
 #!/usr/bin/env bash
+set -u
 
-wallpaperDir="$HOME/nix/wallpapers" #move this?
+wallpaperDir="$HOME/nix/wallpapers"
 scriptsDir="$HOME/.config/hypr/scripts"
 
-# variables
-focused_monitor=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
-# awww transition config
 FPS=240
 TYPE="any"
 DURATION=2
 BEZIER=".43,1.19,1,.4"
 SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION"
 
-mapfile -d '' PICS < <(find "${wallpaperDir}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0)
+focused_monitor=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
 
-RANDOM_PIC="${PICS[$((RANDOM % ${#PICS[@]}))]}"
-
-awww query || awww-daemon --format xrgb
-
-awww img -o "$focused_monitor" "$RANDOM_PIC" $SWWW_PARAMS
-echo "$focused_monitor" "\"$RANDOM_PIC\"" $SWWW_PARAMS
-sleep 0.5
-
-#wallust run $RANDOM_PIC
-
-
-# Define the path to the awww cache directory
-cache_dir="$HOME/.cache/awww/"
-
-# Get a list of monitor outputs
-monitor_outputs=($(ls "$cache_dir"))
-
-# Initialize a flag to determine if the ln command was executed
-ln_success=false
-
-# Get current focused monitor
-current_monitor=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
-echo $current_monitor
-# Construct the full path to the cache file
-cache_file="$cache_dir$current_monitor"
-echo $cache_file
-# Check if the cache file exists for the current monitor output
-if [ -f "$cache_file" ]; then
-  # Get the wallpaper path from the cache file
-  wallpaper_path=$(
-    strings "$cache_file" |
-    grep -v 'Lanczos3' |
-    head -n 1
+if [ $# -ge 1 ] && [ -f "$1" ]; then
+  RANDOM_PIC="$1"
+else
+  mapfile -d '' PICS < <(
+    find "$wallpaperDir" -type f \( \
+      -iname "*.jpg" -o \
+      -iname "*.jpeg" -o \
+      -iname "*.png" -o \
+      -iname "*.gif" \
+    \) -print0
   )
-  echo $wallpaper_path
-  # symlink the wallpaper to the location Rofi can access
-  if ln -sf "$wallpaper_path" "$HOME/.config/rofi/.current_wallpaper"; then
-    ln_success=true # Set the flag to true upon successful execution
-  fi
-  # copy the wallpaper for wallpaper effects
-  cp -r "$wallpaper_path" "$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
+  RANDOM_PIC="${PICS[$((RANDOM % ${#PICS[@]}))]}"
 fi
 
-# Check the flag before executing further commands
-if [ "$ln_success" = true ]; then
-  # execute wallust
-  echo 'about to execute wallust'
-  # execute wallust skipping tty and terminal changes
-  wallust run "$wallpaper_path" -s &
+awww query >/dev/null 2>&1 || awww-daemon --format xrgb
+awww img -o "$focused_monitor" "$RANDOM_PIC" $SWWW_PARAMS
 
+echo "monitor: $focused_monitor"
+echo "wallpaper: $RANDOM_PIC"
+
+sleep 0.5
+
+ln_success=false
+
+if [ -n "$RANDOM_PIC" ]; then
+  if ln -sf "$RANDOM_PIC" "$HOME/.config/rofi/.current_wallpaper"; then
+    ln_success=true
+  fi
+
+  cp -f "$RANDOM_PIC" "$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
+fi
+
+if [ "$ln_success" = true ]; then
+  echo "about to execute wallust"
+
+  command -v wallust
+  wallust run "$RANDOM_PIC" -s
 fi
 
 sleep 0.5

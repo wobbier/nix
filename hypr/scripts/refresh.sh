@@ -8,6 +8,7 @@ for _prs in "${_ps[@]}"; do
 done
 
 sleep 0.3
+hyprctl reload
 waybar &
 
 # kitty @ set-colors --all --configured ~/.config/kitty/colors-kitty.conf
