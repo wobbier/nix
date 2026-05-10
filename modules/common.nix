@@ -75,7 +75,6 @@
   ########################################
   # Core Programs (shared)
   ########################################
-  programs.firefox.enable = true;
   programs.steam.enable = true;
 
   programs.hyprland = {
