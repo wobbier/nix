@@ -59,7 +59,7 @@
       libvdpau
     ];
   };
-  
+
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
@@ -83,10 +83,27 @@
     # Only available from driver 515.43.04+
     open = true;
 
+
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+    #package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+      version = "610.43.02";
+
+      # Make sure to set these to `lib.fakeHash`
+      # every time you change the version - nix
+      # will trust them, and not redownload the driver.
+      sha256_64bit = "sha256-MDSgVLtM33dS/43CclZMsQVROAS/9TU4lFkBsWyndGM=";
+      openSha256 = "sha256-hP5NVZZ4vGsACHLmUDKq4uckpd/kn1GxCSYnnJfAuBs=";
+      settingsSha256 = "sha256-0YAhufRgjDW+uR+kjaTb154fibpcDw8QowfrucoZsKE=";
+
+      # headless servers only feature, disabling at
+      # the package level because that's one less
+      # hash to define.
+      usePersistenced = false;
+    };
   };
 
   security.polkit.enable = true;

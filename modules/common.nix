@@ -113,6 +113,9 @@
   #    discordBranch = "stable";
   #  };
   #};
+  
+  # Open With Fix
+  environment.etc."xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
 
   ########################################
   # System Packages (shared)
@@ -158,12 +161,15 @@
     fastfetch
     wlvncc
     caligula # iso burning
+    claude-code
+    wf-recorder
 
     # media
     obs-studio
     vlc
     audacity
     plex-desktop
+    discord-ptb
 
     # dev
     vscode-fhs
@@ -171,11 +177,18 @@
     python3
     renderdoc
     dotnet-sdk
-    gnumake
-    gcc
+    #gnumake
+    #gcc
     autoconf
     cmakeWithGui
     blender
+
+    #devnew
+    jetbrains.clion
+    bear
+    gnumake
+    gcc
+    gdb
 
     # gamedev
     unityhub
@@ -183,7 +196,6 @@
     unrar
 
     # gaming
-    steam
     #lutris
     wowup-cf
     bolt-launcher # runescape
