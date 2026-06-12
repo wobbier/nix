@@ -34,7 +34,7 @@
         ./configuration.nix
         ./hosts/danktank/configuration.nix
         ./hardware-configuration.nix
-
+        ./modules/odysseus.nix
         {
           environment.systemPackages = [
             warcraftlogs.packages.${system}.warcraftlogs

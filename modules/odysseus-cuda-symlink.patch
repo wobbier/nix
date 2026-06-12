@@ -1,0 +1,14 @@
+--- a/routes/cookbook_helpers.py
++++ b/routes/cookbook_helpers.py
+@@ -767,6 +767,11 @@
+     runner_lines.append('      }')
+     runner_lines.append('      if _odysseus_has_cudart; then')
+     runner_lines.append('        echo "[odysseus] CUDA nvcc + cudart found — building llama-server with CUDA (GPU) support..."')
++    runner_lines.append('        for _vso in "$CUDA_HOME/lib/lib"*.so.* "$CUDA_HOME/lib64/lib"*.so.*; do')
++    runner_lines.append('          [ -f "$_vso" ] || continue')
++    runner_lines.append('          _base="${_vso%%so.*}so"')
++    runner_lines.append('          [ -e "$_base" ] || ln -sf "$(basename "$_vso")" "$_base"')
++    runner_lines.append('        done')
+     runner_lines.append('        cmake -B build -DCMAKE_BUILD_TYPE=Release -DGGML_CUDA=ON && cmake --build build -j"$NPROC" --target llama-server && ln -sf ~/llama.cpp/build/bin/llama-server ~/bin/llama-server')
+     runner_lines.append('      else')
+     runner_lines.append('        echo "[odysseus] WARNING: nvcc found but CUDA runtime (libcudart.so) is not visible — building llama-server for CPU only."')

@@ -14,7 +14,6 @@
   ########################################
   # Hostname is host-specific; set that in hosts/*/configuration.nix
   networking.networkmanager.enable = true;
-  systemd.services.NetworkManager-wait-online.enable = false;
 
   ########################################
   # Locale & Time (shared)
