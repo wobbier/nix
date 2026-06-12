@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777941427,
-        "narHash": "sha256-/lkr8X8HFgnWr1T9mpJ7lzlVX/LySVNz1TVN/cCO4wc=",
+        "lastModified": 1781184042,
+        "narHash": "sha256-vJeCa63K+VLD37E6PLRz2iOqkuGCQNnGrLnY0a1zWM4=",
         "owner": "wobbier",
         "repo": "archon-nix",
-        "rev": "882f0b55f3afb50cd2c2594af193642c1ef0e375",
+        "rev": "6d1c354d70586292e57418eb3747b683d3e0fa69",
         "type": "github"
       },
       "original": {
@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778110974,
-        "narHash": "sha256-7V7bW5uZSdKPRmemMQUulXRffnlnjRj5N/HGHOsOda8=",
+        "lastModified": 1781189114,
+        "narHash": "sha256-5inaamLgUMWy+MOBE9ChF9QAF1o/74LFuHkI0W/9rqc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "75fac363324f18d2b83a30fd916e509d2a02fb0e",
+        "rev": "486595d2cf49cfcd649b58a284fa11ac0e34da22",
         "type": "github"
       },
       "original": {
@@ -42,15 +42,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1778143382,
-        "narHash": "sha256-Ju2IHPiOSBVE+csXsArfJxh0K0LXw6KqsyW48/QS5vc=",
+        "lastModified": 1781074563,
+        "narHash": "sha256-md8WlXOlfnIeHeOScMTTHFyf2d6iaTwPl2apR5EQ3P4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "060a6000b4e10872d66f99504a967ca0cd84507b",
+        "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -72,11 +73,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1777789800,
-        "narHash": "sha256-XHCvLGu/bEEZRzXVKFu1i+2YB102Nr00n8e7xrzsfVs=",
+        "lastModified": 1781101834,
+        "narHash": "sha256-gNVY6SYglFe37FpD+NnOjTipsqvVMM2vh/uc22KDEsA=",
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
-        "rev": "d0e921cc48aab6137d203a3eab19601dc2bdc0c3",
+        "rev": "0243dd6707c969fc8440216c811b3f2e4a4cceb7",
         "type": "github"
       },
       "original": {
@@ -107,11 +108,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777942501,
-        "narHash": "sha256-YJh9KNpaekc5dd9GpDAFoBBS15ZnPX3tfW0XXqU8/Ck=",
+        "lastModified": 1780343039,
+        "narHash": "sha256-BUe4B5IP0IodZb+O0Wakv8DOZIg91R3EsTaCVMwm2Bw=",
         "owner": "wobbier",
         "repo": "warcraftlogs-nixos",
-        "rev": "8d4371e8310efb6e782d8c3bf6b8241df5c8520f",
+        "rev": "c5f164255f43d1a09d0778e780c5c73f45103ad3",
         "type": "github"
       },
       "original": {

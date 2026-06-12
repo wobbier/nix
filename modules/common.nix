@@ -28,7 +28,6 @@
 
   # Display Manager
   services.displayManager.gdm.enable = true;
-  services.displayManager.gdm.wayland = true;
 
   # Desktop Environments
   services.desktopManager.plasma6 = {
