@@ -40,31 +40,20 @@
   };
 
 
-  home.activation.mySymlinks = lib.mkAfter ''
-    rm -rf ${config.home.homeDirectory}/.config/hypr
-    ln -sfn ${config.home.homeDirectory}/nix/hypr ${config.home.homeDirectory}/.config/hypr
-
-    rm -rf ${config.home.homeDirectory}/.config/wallust
-    ln -sfn ${config.home.homeDirectory}/nix/config/wallust ${config.home.homeDirectory}/.config/wallust
-
-    rm -rf ${config.home.homeDirectory}/.config/waybar
-    ln -sfn ${config.home.homeDirectory}/nix/config/waybar ${config.home.homeDirectory}/.config/waybar
-
-    rm -rf ${config.home.homeDirectory}/.config/rofi
-    ln -sfn ${config.home.homeDirectory}/nix/config/rofi ${config.home.homeDirectory}/.config/rofi
-
-    rm -rf ${config.home.homeDirectory}/.config/kitty
-    ln -sfn ${config.home.homeDirectory}/nix/config/kitty ${config.home.homeDirectory}/.config/kitty
-
-    rm -rf ${config.home.homeDirectory}/.config/btop
-    ln -sfn ${config.home.homeDirectory}/nix/config/btop ${config.home.homeDirectory}/.config/btop
-
-    rm -rf ${config.home.homeDirectory}/.config/wlogout
-    ln -sfn ${config.home.homeDirectory}/nix/config/wlogout ${config.home.homeDirectory}/.config/wlogout
-  '';
-
-  xdg.configFile."mako/config".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/config/mako/config";
+  xdg.configFile =
+    let
+      link = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${path}";
+    in
+    {
+      "hypr".source        = link "nix/hypr";
+      "wallust".source     = link "nix/config/wallust";
+      "waybar".source      = link "nix/config/waybar";
+      "rofi".source        = link "nix/config/rofi";
+      "kitty".source       = link "nix/config/kitty";
+      "btop".source        = link "nix/config/btop";
+      "wlogout".source     = link "nix/config/wlogout";
+      "mako/config".source = link "nix/config/mako/config";
+    };
 
   # Shell
   programs.ssh = {

@@ -12,9 +12,11 @@
     archon.inputs.nixpkgs.follows = "nixpkgs";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
+    odysseus.url = "github:pewdiepie-archdaemon/odysseus/pull/2568/head";
+    odysseus.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, warcraftlogs, archon, spicetify-nix, ... } @ inputs: #dolphin-overlay, 
+  outputs = { self, nixpkgs, warcraftlogs, archon, spicetify-nix, odysseus, ... } @ inputs: #dolphin-overlay, 
   let
     system = "x86_64-linux";
 
@@ -34,7 +36,6 @@
         ./configuration.nix
         ./hosts/danktank/configuration.nix
         ./hardware-configuration.nix
-        ./modules/odysseus.nix
         {
           environment.systemPackages = [
             warcraftlogs.packages.${system}.warcraftlogs
