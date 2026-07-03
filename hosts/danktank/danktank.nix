@@ -9,7 +9,7 @@
   # Imports
   ########################################
   imports = [
-    ../../hardware-configuration.nix  # machine-specific
+    ./hardware-configuration.nix
     ../../modules/common.nix          # shared config
     ../../modules/gaming.nix          # gaming config
     ../../modules/media.nix           # media / desktop apps

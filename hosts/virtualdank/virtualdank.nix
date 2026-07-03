@@ -9,7 +9,7 @@
   # Imports
   ########################################
   imports = [
-    ../../hardware-configuration.nix  # machine-specific
+    ./hardware-configuration.nix
     ../../modules/common.nix          # shared config
     ../../modules/server.nix          # shared config
     ../../users/mitch.nix             # user config

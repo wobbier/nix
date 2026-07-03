@@ -12,7 +12,7 @@ in
   # Imports
   ########################################
   imports = [
-    ../../hardware-configuration.nix
+    ./hardware-configuration.nix
     ../../modules/common.nix
     ../../modules/gaming.nix          # gaming config
     ../../modules/media.nix           # media / desktop apps
