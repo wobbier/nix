@@ -26,6 +26,7 @@ in
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "hm-bak";
+  nixpkgs.config.allowUnfree = true;
 
   # Wire Mitch's home config
   home-manager.users.mitch = import ./home/mitch.nix;

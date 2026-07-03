@@ -12,7 +12,6 @@
   ########################################
   # Networking (shared defaults)
   ########################################
-  # Hostname is host-specific; set that in hosts/*/configuration.nix
   networking.networkmanager.enable = true;
 
   ########################################
@@ -91,7 +90,6 @@
   programs.thunderbird.enable = true;
 
   services.openssh.enable = true;
-  services.flatpak.enable = true;
 
   programs.spicetify =
   let
@@ -102,16 +100,6 @@
     theme = spicePkgs.themes.defaultDynamic;
   };
 
-  #programs.vesktop = { #home config?
-  #  enable = true;
-  #  settings = {
-  #    splashTheming = false;
-  #    staticTitle = true;
-  #    hardwareAcceleration = true;
-  #    discordBranch = "stable";
-  #  };
-  #};
-  
   # Open With Fix
   environment.etc."xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
 
@@ -134,7 +122,6 @@
     flameshot
     hyprpicker
     localsend
-    vesktop #discord client
 
     # audio
     pavucontrol
@@ -149,7 +136,6 @@
 
     # utilities
     sbctl
-    mangohud
     grim slurp wl-clipboard
     rofi
     p7zip
@@ -162,7 +148,6 @@
     wf-recorder
 
     # media
-    obs-studio
     vlc
     audacity
     plex-desktop
@@ -194,20 +179,9 @@
     godot-mono
     unrar
 
-    # gaming
-    #lutris
-    wowup-cf
-    bolt-launcher # runescape
-
     # web browser
     google-chrome
     #bottles-unwrapped
-
-    # work
-    openconnect
-    openconnect_openssl
-    parsec-bin
-    slack
 
     # virt
     virtiofsd
@@ -263,13 +237,10 @@
     192.168.18.16 dlc.mitch.gg
   '';
   
-  networking.firewall.allowedTCPPorts = [ 53317 ];
-  networking.firewall.allowedUDPPorts = [ 53317 ];
-
-  /*
-  steam-run ../bx/tools/bin/linux/genie \
-  --with-tools --with-combined-examples --with-shared-lib \
-  --gcc=linux-gcc \
-  gmake
-  */
+  networking.firewall.allowedTCPPorts = [
+    53317 #localsend
+  ];
+  networking.firewall.allowedUDPPorts = [
+    53317 #localsend
+  ];
 }

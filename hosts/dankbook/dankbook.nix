@@ -14,6 +14,9 @@ in
   imports = [
     ../../hardware-configuration.nix
     ../../modules/common.nix
+    ../../modules/gaming.nix          # gaming config
+    ../../modules/work.nix            # work config
+    ../../users/mitch.nix             # user config
     ./modules/sound.nix
     ./modules/touchbar.nix
   ];

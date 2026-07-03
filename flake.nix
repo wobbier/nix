@@ -28,7 +28,7 @@
       };
       modules = [
         ./configuration.nix
-        ./hosts/danktank/configuration.nix
+        ./hosts/danktank/danktank.nix
         #./modules/odysseus.nix
         {
           environment.systemPackages = [
@@ -52,7 +52,7 @@
 
       modules = [
         ./configuration.nix
-        ./hosts/dankbook/configuration.nix
+        ./hosts/dankbook/dankbook.nix
 
         {
           environment.systemPackages = [
@@ -75,7 +75,7 @@
 
       modules = [
         ./configuration.nix
-        ./hosts/virtualdank/configuration.nix
+        ./hosts/virtualdank/virtualdank.nix
       ];
     };
   };

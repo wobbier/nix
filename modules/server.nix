@@ -130,7 +130,6 @@
 
     # lock screen
     wlogout
-    hyprlock
 
     # utilities
     sbctl
@@ -155,7 +154,7 @@
     autoconf
 
     # rice
-    awww # swap to awww when you flake your shit
+    awww
     google-chrome
 
     # plex

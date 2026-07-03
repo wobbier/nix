@@ -11,6 +11,9 @@
   imports = [
     ../../hardware-configuration.nix  # machine-specific
     ../../modules/common.nix          # shared config
+    ../../modules/gaming.nix          # gaming config
+    ../../modules/work.nix            # work config
+    ../../users/mitch.nix             # user config
   ];
 
   ########################################
