@@ -19,11 +19,6 @@
   outputs = { self, nixpkgs, warcraftlogs, archon, spicetify-nix, odysseus, ... } @ inputs: #dolphin-overlay, 
   let
     system = "x86_64-linux";
-
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
   in {
     nixosConfigurations.danktank = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -31,11 +26,10 @@
       specialArgs = {
         inherit inputs;
       };
-
       modules = [
         ./configuration.nix
         ./hosts/danktank/configuration.nix
-        ./hardware-configuration.nix
+        #./modules/odysseus.nix
         {
           environment.systemPackages = [
             warcraftlogs.packages.${system}.warcraftlogs
@@ -59,7 +53,6 @@
       modules = [
         ./configuration.nix
         ./hosts/dankbook/configuration.nix
-        ./hardware-configuration.nix
 
         {
           environment.systemPackages = [
@@ -83,7 +76,6 @@
       modules = [
         ./configuration.nix
         ./hosts/virtualdank/configuration.nix
-        ./hardware-configuration.nix
       ];
     };
   };

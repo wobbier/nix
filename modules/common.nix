@@ -144,9 +144,8 @@
     # notifications
     mako
 
-    # lock screen
+    # power menu
     wlogout
-    hyprlock
 
     # utilities
     sbctl
@@ -168,6 +167,8 @@
     audacity
     plex-desktop
     discord-ptb
+    bitwig-studio6
+    ffmpeg-full
 
     # dev
     vscode-fhs
@@ -250,8 +251,6 @@
   ########################################
   # Security
   ########################################
-  security.pam.services.sddm.enableKwallet = true;
-
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"
   ];
@@ -261,6 +260,7 @@
     192.168.18.16 deluge.mitch.gg
     192.168.18.16 plex.mitch.gg
     192.168.18.16 open.mitch.gg
+    192.168.18.16 dlc.mitch.gg
   '';
   
   networking.firewall.allowedTCPPorts = [ 53317 ];
