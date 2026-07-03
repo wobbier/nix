@@ -2,12 +2,6 @@
 { config, pkgs, inputs, ... }:
 
 {
-  ########################################
-  # Imports (shared users, etc.)
-  ########################################
-  imports = [
-    ../users/mitch.nix
-  ];
 
   ########################################
   # Networking (shared defaults)
@@ -72,7 +66,6 @@
   ########################################
   # Core Programs (shared)
   ########################################
-  programs.steam.enable = true;
 
   programs.hyprland = {
     enable = true;
@@ -87,18 +80,7 @@
     polkitPolicyOwners = [ "mitch" ];
   };
 
-  programs.thunderbird.enable = true;
-
   services.openssh.enable = true;
-
-  programs.spicetify =
-  let
-    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-  in
-  {
-    enable = true;
-    theme = spicePkgs.themes.defaultDynamic;
-  };
 
   # Open With Fix
   environment.etc."xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
@@ -149,35 +131,12 @@
 
     # media
     vlc
-    audacity
-    plex-desktop
-    discord-ptb
-    bitwig-studio6
     ffmpeg-full
 
     # dev
     vscode-fhs
     nodejs
     python3
-    renderdoc
-    dotnet-sdk
-    #gnumake
-    #gcc
-    autoconf
-    cmakeWithGui
-    blender
-
-    #devnew
-    jetbrains.clion
-    bear
-    gnumake
-    gcc
-    gdb
-
-    # gamedev
-    unityhub
-    godot-mono
-    unrar
 
     # web browser
     google-chrome
@@ -215,7 +174,6 @@
     qemu.swtpm.enable = true;
   };
   programs.virt-manager.enable = true;
-  users.users.mitch.extraGroups = [ "libvirtd" "kvm" ];
 
   hardware.graphics = {
     enable = true;
@@ -229,6 +187,7 @@
     "openssl-1.1.1w"
   ];
 
+  # LAN overrides so every machine resolves nucc-hosted services locally
   networking.extraHosts = ''
     192.168.18.16 nucc
     192.168.18.16 deluge.mitch.gg
@@ -236,13 +195,7 @@
     192.168.18.16 open.mitch.gg
     192.168.18.16 dlc.mitch.gg
   '';
-  
-  #networking.firewall.allowedTCPPorts = [
-  #  53317 #localsend
-  #];
-  #networking.firewall.allowedUDPPorts = [
-  #  53317 #localsend
-  #];
-  networking.firewall.allowedTCPPorts = [ 7878 53317 80 443 ];
-  networking.firewall.allowedUDPPorts = [ 53317 80 443 ];
+
+  networking.firewall.allowedTCPPorts = [ 53317 ]; # localsend
+  networking.firewall.allowedUDPPorts = [ 53317 ]; # localsend
 }

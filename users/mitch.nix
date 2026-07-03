@@ -7,7 +7,7 @@
   users.users.mitch = {
     isNormalUser = true;
     description = "Mitch Andrews";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" ];
 
     # Per-user GUI / dev tools (can move to Home Manager later)
     packages = with pkgs; [

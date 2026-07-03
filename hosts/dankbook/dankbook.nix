@@ -15,6 +15,8 @@ in
     ../../hardware-configuration.nix
     ../../modules/common.nix
     ../../modules/gaming.nix          # gaming config
+    ../../modules/media.nix           # media / desktop apps
+    ../../modules/dev.nix             # dev / gamedev tooling
     ../../modules/work.nix            # work config
     ../../users/mitch.nix             # user config
     ./modules/sound.nix

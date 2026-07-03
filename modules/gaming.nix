@@ -1,4 +1,4 @@
-# Common configuration shared by all machines (desktop + laptop)
+# Gaming config (steam, discord, launchers)
 { config, pkgs, inputs, ... }:
 
 {
@@ -36,28 +36,6 @@
     #bottles-unwrapped
   ];
 
-  ########################################
-  # Screen Sharing
-  ########################################
-  xdg.portal = {
-    enable = true;
-
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
-    ];
-
-    config = {
-      common = {
-        default = [ "hyprland" ];
-      };
-    };
-  };
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-  
   /*
   steam-run ../bx/tools/bin/linux/genie \
   --with-tools --with-combined-examples --with-shared-lib \

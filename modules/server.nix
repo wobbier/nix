@@ -1,17 +1,43 @@
 { config, pkgs, inputs, ... }:
 
 {
-  services.openssh.enable = true;
   services.flatpak.enable = true;
 
   services.seerr.enable = true;
 
+  ########################################
+  # Media stack
+  ########################################
+  # Everything that touches media files runs in the "media" group;
+  # media dirs should be group-owned (chgrp -R media, g+rw, dirs g+s).
+  users.groups.media = { };
+  users.users.mitch.extraGroups = [ "media" ];
+
   services.plex = {
     enable = true;
     openFirewall = true;
+    group = "media";
   };
 
   services.radarr = {
+    enable = true;
+    openFirewall = true;
+    group = "media";
+  };
+
+  services.sonarr = {
+    enable = true;
+    openFirewall = true;
+    group = "media";
+  };
+
+  services.qbittorrent = {
+    enable = true;
+    openFirewall = true;
+    group = "media";
+  };
+
+  services.prowlarr = {
     enable = true;
     openFirewall = true;
   };
@@ -20,22 +46,9 @@
     enable = true;
   };
 
-  ########################################
-  # System Packages (shared)
-  ########################################
-
-  environment.systemPackages = with pkgs; [
-    nodejs
-    python3
-
-    # plex
-    sonarr
-    qbittorrent
-    prowlarr
-  ];
   virtualisation.docker.enable = true;
 
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
-  users.users.mitch.extraGroups = [ "libvirtd" "kvm" ];
+  # Web / reverse proxy for the *.mitch.gg subdomains
+  # (radarr's 7878 and plex's 32400 are opened by their openFirewall options)
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
 }
