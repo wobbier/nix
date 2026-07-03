@@ -237,10 +237,12 @@
     192.168.18.16 dlc.mitch.gg
   '';
   
-  networking.firewall.allowedTCPPorts = [
-    53317 #localsend
-  ];
-  networking.firewall.allowedUDPPorts = [
-    53317 #localsend
-  ];
+  #networking.firewall.allowedTCPPorts = [
+  #  53317 #localsend
+  #];
+  #networking.firewall.allowedUDPPorts = [
+  #  53317 #localsend
+  #];
+  networking.firewall.allowedTCPPorts = [ 7878 53317 80 443 ];
+  networking.firewall.allowedUDPPorts = [ 53317 80 443 ];
 }
