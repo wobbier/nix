@@ -11,7 +11,6 @@
 
     # Per-user GUI / dev tools (can move to Home Manager later)
     packages = with pkgs; [
-      #kdePackages.kate
     ];
   };
 }
