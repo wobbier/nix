@@ -4,18 +4,18 @@
 {
 
   ########################################
-  # Networking (shared defaults)
+  # Networking
   ########################################
   networking.networkmanager.enable = true;
 
   ########################################
-  # Locale & Time (shared)
+  # Locale & Time
   ########################################
   time.timeZone = "America/Toronto";
   i18n.defaultLocale = "en_CA.UTF-8";
 
   ########################################
-  # Display Server / Desktop Environments (shared)
+  # Display Server / Desktop Environments
   ########################################
   services.xserver.enable = true;
 
@@ -36,12 +36,12 @@
   };
 
   ########################################
-  # Printing (shared)
+  # Printing
   ########################################
   services.printing.enable = true;
 
   ########################################
-  # Audio (PipeWire) (shared)
+  # Audio
   ########################################
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -57,14 +57,18 @@
   };
 
   ########################################
-  # Login / Session (shared)
+  # Login / Session
   ########################################
   services.displayManager.autoLogin.enable = false;
+
   # Electron flags
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  # Exported for hyprland.conf
+  environment.sessionVariables.HOSTNAME = config.networking.hostName;
+
   ########################################
-  # Core Programs (shared)
+  # Core Programs
   ########################################
 
   programs.hyprland = {
@@ -86,7 +90,7 @@
   environment.etc."xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
 
   ########################################
-  # System Packages (shared)
+  # System Packages
   ########################################
   nixpkgs.config.allowUnfree = true;
 
@@ -140,7 +144,6 @@
 
     # web browser
     google-chrome
-    #bottles-unwrapped
 
     # virt
     virtiofsd
@@ -187,7 +190,6 @@
     "openssl-1.1.1w"
   ];
 
-  # LAN overrides so every machine resolves nucc-hosted services locally
   networking.extraHosts = ''
     192.168.18.16 nucc
     192.168.18.16 deluge.mitch.gg
