@@ -12,6 +12,7 @@
     ./hardware-configuration.nix
     ../../modules/common.nix          # shared config
     ../../modules/server.nix          # shared config
+    ../../modules/web.nix             # public *.mitch.gg sites
     ../../users/mitch.nix             # user config
   ];
 
@@ -19,8 +20,8 @@
   # Boot
   ########################################
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 3;
   boot.loader.grub.enable = false;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # Latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;

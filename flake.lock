@@ -124,8 +124,7 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "odysseus": "odysseus",
-        "spicetify-nix": "spicetify-nix",
-        "warcraftlogs": "warcraftlogs"
+        "spicetify-nix": "spicetify-nix"
       }
     },
     "spicetify-nix": {
@@ -176,26 +175,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "warcraftlogs": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1780343039,
-        "narHash": "sha256-BUe4B5IP0IodZb+O0Wakv8DOZIg91R3EsTaCVMwm2Bw=",
-        "owner": "wobbier",
-        "repo": "warcraftlogs-nixos",
-        "rev": "c5f164255f43d1a09d0778e780c5c73f45103ad3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "wobbier",
-        "repo": "warcraftlogs-nixos",
         "type": "github"
       }
     }
