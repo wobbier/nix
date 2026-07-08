@@ -1,7 +1,3 @@
-# NixOS system configuration
-# Host: virtualdank
-# Role: nix config playground in VM
-
 { config, pkgs, ... }:
 
 {
@@ -13,6 +9,7 @@
     ../../modules/common.nix          # shared config
     ../../modules/server.nix          # shared config
     ../../modules/web.nix             # public *.mitch.gg sites
+    ../../modules/snit-bot.nix        # discord bot
     ../../users/mitch.nix             # user config
   ];
 
@@ -39,6 +36,20 @@
   # Graphics (OpenGL)
   ########################################
   hardware.graphics.enable = true;
+
+  ########################################
+  # Auto upgrade
+  ########################################
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:wobbier/nix#nucc";
+    dates = "Tue 07:00";
+    flags = [
+      "--update-input" "nixpkgs"
+      "--no-write-lock-file"
+    ];
+    allowReboot = true;
+  };
 
   ########################################
   # System State Version
