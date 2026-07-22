@@ -27,6 +27,9 @@ in
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "hm-bak";
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-40.10.5"
+  ];
 
   # Wire Mitch's home config
   home-manager.users.mitch = import ./home/mitch.nix;

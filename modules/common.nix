@@ -137,6 +137,9 @@
     vlc
     ffmpeg-full
 
+    # image editing
+    pinta
+
     # dev
     vscode-fhs
     nodejs

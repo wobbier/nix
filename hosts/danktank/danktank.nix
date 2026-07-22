@@ -113,6 +113,10 @@
 
   security.polkit.enable = true;
 
+  ########################################
+  # Windows / NTFS data drives
+  ########################################
+
   fileSystems."/mnt/windows/Programs" = {
     device = "/dev/disk/by-uuid/98644EC9644EA9B8";
     fsType = "ntfs3";
@@ -137,17 +141,18 @@
     options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
   };
 
+  # Windows C drive
+  # Temp Fix:
+  #   sudo ntfsfix -d /dev/disk/by-uuid/9CC44BA5C44B810E
+  # Permanent fix:
+  #   disable hibernation in Windows: powercfg /h off
   fileSystems."/mnt/windows/WinNVME1" = {
     device = "/dev/disk/by-uuid/9CC44BA5C44B810E";
     fsType = "ntfs3";
     options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
   };
 
-  fileSystems."/mnt/windows/WinNVME2" = {
-    device = "/dev/disk/by-uuid/34FCC9BFFCC97B9C";
-    fsType = "ntfs3";
-    options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
-  };
+  environment.systemPackages = [ pkgs.ntfs3g ];
 
   ########################################
   # Firewall / Networking (optional)

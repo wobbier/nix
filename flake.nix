@@ -10,11 +10,11 @@
     archon.inputs.nixpkgs.follows = "nixpkgs";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
-    odysseus.url = "github:pewdiepie-archdaemon/odysseus/pull/2568/head";
-    odysseus.inputs.nixpkgs.follows = "nixpkgs";
+    #odysseus.url = "github:pewdiepie-archdaemon/odysseus/pull/2568/head";
+    #odysseus.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, archon, spicetify-nix, odysseus, ... } @ inputs: #dolphin-overlay,
+  outputs = { self, nixpkgs, archon, spicetify-nix, ... } @ inputs: #dolphin-overlay, odysseus
   let
     system = "x86_64-linux";
   in {
