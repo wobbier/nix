@@ -18,10 +18,10 @@
   };
   environment.systemPackages = [ pkgs.wayvnc ];
 
-
   ########################################
   # Media stack
   ########################################
+  
   users.groups.media = { };
   users.users.mitch.extraGroups = [ "media" ];
 
@@ -55,6 +55,10 @@
     group = "media";
     torrentingPort = 49160;
   };
+
+  systemd.services.qbittorrent.serviceConfig.UMask = "0002";
+  systemd.services.sonarr.serviceConfig.UMask = lib.mkForce "0002";
+  systemd.services.radarr.serviceConfig.UMask = lib.mkForce "0002";
 
   services.prowlarr = {
     enable = true;
