@@ -35,7 +35,12 @@
   ########################################
   # Graphics (OpenGL)
   ########################################
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver   # VAAPI for Broadwell+ (iHD driver)
+    ];
+  };
 
   ########################################
   # Auto upgrade
