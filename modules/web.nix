@@ -68,6 +68,21 @@
         '';
       };
 
+      # barker app
+      "barker.mitch.gg" = {
+        enableACME = true;
+        forceSSL = true;
+        root = "/mnt/media/www/barker.mitch.gg/html";
+        locations."/".extraConfig = ''
+          autoindex on;
+          autoindex_exact_size off;
+          autoindex_localtime on;
+          add_header 'Access-Control-Allow-Origin' '*';
+          add_header 'Access-Control-Allow-Methods' 'GET, OPTIONS';
+          add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept';
+        '';
+      };
+
       # raw file shit
       "open.mitch.gg" = {
         enableACME = true;
