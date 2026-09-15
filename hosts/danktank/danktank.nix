@@ -2,7 +2,7 @@
 # Host: danktank
 # Role: personal desktop / gaming workstation
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   ########################################
@@ -38,12 +38,26 @@
   # Networking
   ########################################
   networking.hostName = "danktank";
+  networking.networkmanager.dns = "none";
+  networking.nameservers = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" ];
 
   boot.extraModulePackages = with config.boot.kernelPackages; [
     r8125
   ];
 
   boot.blacklistedKernelModules = [ "r8169" ];
+
+  ########################################
+  # Display Manager
+  ########################################
+  services.displayManager.gdm.enable = lib.mkForce false;
+  services.greetd = {
+    enable = true;
+    settings.default_session = {
+      command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --remember-session --cmd start-hyprland";
+      user = "greeter";
+    };
+  };
 
   ########################################
   # Graphics (OpenGL / Nvidia)
@@ -93,66 +107,68 @@
     # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
-    #package = config.boot.kernelPackages.nvidiaPackages.stable;
-    package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-      version = "610.43.02";
-
-      # Make sure to set these to `lib.fakeHash`
-      # every time you change the version - nix
-      # will trust them, and not redownload the driver.
-      sha256_64bit = "sha256-MDSgVLtM33dS/43CclZMsQVROAS/9TU4lFkBsWyndGM=";
-      openSha256 = "sha256-hP5NVZZ4vGsACHLmUDKq4uckpd/kn1GxCSYnnJfAuBs=";
-      settingsSha256 = "sha256-0YAhufRgjDW+uR+kjaTb154fibpcDw8QowfrucoZsKE=";
-
-      # headless servers only feature, disabling at
-      # the package level because that's one less
-      # hash to define.
-      usePersistenced = false;
-    };
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+#    package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+#      version = "610.43.02";
+#
+#      # Make sure to set these to `lib.fakeHash`
+#      # every time you change the version - nix
+#      # will trust them, and not redownload the driver.
+#      sha256_64bit = "sha256-MDSgVLtM33dS/43CclZMsQVROAS/9TU4lFkBsWyndGM=";
+#      openSha256 = "sha256-hP5NVZZ4vGsACHLmUDKq4uckpd/kn1GxCSYnnJfAuBs=";
+#      settingsSha256 = "sha256-0YAhufRgjDW+uR+kjaTb154fibpcDw8QowfrucoZsKE=";
+#
+#      # headless servers only feature, disabling at
+#      # the package level because that's one less
+#      # hash to define.
+#      usePersistenced = false;
+#    };
   };
 
   security.polkit.enable = true;
 
-  ########################################
-  # Windows / NTFS data drives
-  ########################################
 
-  fileSystems."/mnt/windows/Programs" = {
-    device = "/dev/disk/by-uuid/98644EC9644EA9B8";
-    fsType = "ntfs3";
-    options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
-  };
-
-  fileSystems."/mnt/windows/Tankhouse" = {
-    device = "/dev/disk/by-uuid/48E221F9E221EBBE";
-    fsType = "ntfs3";
-    options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
-  };
-
-  fileSystems."/mnt/windows/WOB" = {
-    device = "/dev/disk/by-uuid/7A6AA2086AA1C0ED";
-    fsType = "ntfs3";
-    options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
-  };
-
-  fileSystems."/mnt/windows/DNA" = {
-    device = "/dev/disk/by-uuid/FC7CB12C7CB0E296";
-    fsType = "ntfs3";
-    options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
-  };
-
-  # Windows C drive
-  # Temp Fix:
-  #   sudo ntfsfix -d /dev/disk/by-uuid/9CC44BA5C44B810E
-  # Permanent fix:
-  #   disable hibernation in Windows: powercfg /h off
-  fileSystems."/mnt/windows/WinNVME1" = {
-    device = "/dev/disk/by-uuid/9CC44BA5C44B810E";
-    fsType = "ntfs3";
-    options = [ "rw" "uid=1000" "gid=100" "nofail" "x-systemd.automount" ];
-  };
-
-  environment.systemPackages = [ pkgs.ntfs3g ];
+#  security.acme = {
+#    acceptTerms = true;
+#    defaults.email = "mitchdandrews@gmail.com";
+#  };
+#
+#  # php-fpm for open.mitch.gg
+#  services.phpfpm.pools.web = {
+#    user = "nginx";
+#    group = "nginx";
+#    settings = {
+#      "listen.owner" = "nginx";
+#      "listen.group" = "nginx";
+#      "pm" = "dynamic";
+#      "pm.max_children" = 8;
+#      "pm.start_servers" = 2;
+#      "pm.min_spare_servers" = 1;
+#      "pm.max_spare_servers" = 4;
+#    };
+#  };
+#
+#  services.nginx = {
+#    enable = true;
+#    recommendedProxySettings = true;
+#    recommendedTlsSettings = true;
+#    recommendedGzipSettings = true;
+#    recommendedOptimisation = true;
+#
+#    virtualHosts = {
+#      # RimTwitch EBS (ebs/server.mjs) — not the Vite dev server, which
+#      # Twitch never talks to directly.
+#      "rimworld.mitch.gg" = {
+#        enableACME = true;
+#        forceSSL = true;
+#        locations."/" = {
+#          proxyPass = "http://127.0.0.1:8081";
+#          proxyWebsockets = true;
+#        };
+#      };
+#
+#    };
+#  };
 
   ########################################
   # Firewall / Networking (optional)

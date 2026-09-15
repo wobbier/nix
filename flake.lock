@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784698553,
-        "narHash": "sha256-c379JjBXu0Yf7zIcEmHMwR8OVDMNlAy2DZpVzQSwYQQ=",
+        "lastModified": 1786128647,
+        "narHash": "sha256-0TUwQ8BLgBFCwaqTptvL+3fEB3x80Mrs4crEBKXimv8=",
         "owner": "wobbier",
         "repo": "archon-nix",
-        "rev": "6fd70f071eb4e2bbe4c87a776f43fc84b1a21034",
+        "rev": "a441e3468f67da88eb4fe3477670062dde30d782",
         "type": "github"
       },
       "original": {
@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784690067,
-        "narHash": "sha256-t86pRs7IPs3RTMPueWvvdcxyTFrctHAv2Jl7jnjsSf8=",
+        "lastModified": 1786999651,
+        "narHash": "sha256-MTGMFlLDTklsXhCp4r5GXB4VAVadPdalXLvUjd/K7h0=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6d8d61567802997f9ec3086b2a837e3ef31fac16",
+        "rev": "353742587cbaf079b3caee743115d037bc51fea6",
         "type": "github"
       },
       "original": {
@@ -42,11 +42,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1784497964,
-        "narHash": "sha256-vlHUuqAcbcH2RKmHbPiuQzbv1pnzzavXnI62RD0bqCU=",
+        "lastModified": 1787001381,
+        "narHash": "sha256-Ue1Yo8gfHdD4TMtNewhA4tkSYeFqXThju0nCyJc3ALo=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "241313f4e8e508cb9b13278c2b0fa25b9ca27163",
+        "rev": "ec2d622de0773551768cf98f3fc50cbcc003b9c5",
         "type": "github"
       },
       "original": {
@@ -56,11 +56,32 @@
         "type": "github"
       }
     },
+    "raiderio-client": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787099404,
+        "narHash": "sha256-18QcN6E4D2Wg0Tv2yCRLvLbHlk1R+ibe0/7gj2YbCv8=",
+        "owner": "wobbier",
+        "repo": "raiderio-client",
+        "rev": "4e2818fa7fa3673af3383a3e772db7e0f61faed4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wobbier",
+        "repo": "raiderio-client",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "archon": "archon",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
+        "raiderio-client": "raiderio-client",
         "spicetify-nix": "spicetify-nix"
       }
     },
@@ -72,11 +93,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1784481035,
-        "narHash": "sha256-nC0QN+GPTnA5i+WBx8S2rG8+VFh+EeBnEe5mU3hlAcQ=",
+        "lastModified": 1786855359,
+        "narHash": "sha256-yeKMWFCPeoIKmPBLLvP1/15ulOJO8i9ZIlSSXGuW6aw=",
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
-        "rev": "a6baa7464f9b21a106dcfabb0bdcfe96fb434409",
+        "rev": "0f478ff79b82abb785160cd4531293f61d21be86",
         "type": "github"
       },
       "original": {

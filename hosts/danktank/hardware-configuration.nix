@@ -14,18 +14,23 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/6f24ce3d-66bb-44a4-b36a-81af38e815f8";
+    { device = "/dev/disk/by-uuid/de9bfdef-07d3-4d99-b2c9-7ce58d2dffb5";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/A576-0C41";
+    { device = "/dev/disk/by-uuid/7ECB-5ACA";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  fileSystems."/mnt/windows/DNA" =
+    { device = "/dev/disk/by-uuid/FC7CB12C7CB0E296";
+      fsType = "ntfs3";
+    };
+
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/6e82e460-9f5f-48b7-a5a9-41f5022e3610"; }
+    [ { device = "/dev/disk/by-uuid/9ae07639-db0b-4fd8-bdfd-26b17e29ca10"; }
     ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

@@ -8,13 +8,15 @@
     #dolphin-overlay.url = "github:rumboon/dolphin-overlay";
     archon.url = "github:wobbier/archon-nix";
     archon.inputs.nixpkgs.follows = "nixpkgs";
+    raiderio-client.url = "github:wobbier/raiderio-client";
+    raiderio-client.inputs.nixpkgs.follows = "nixpkgs";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
     #odysseus.url = "github:pewdiepie-archdaemon/odysseus/pull/2568/head";
     #odysseus.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, archon, spicetify-nix, ... } @ inputs: #dolphin-overlay, odysseus
+  outputs = { self, nixpkgs, archon, raiderio-client, spicetify-nix, ... } @ inputs: #dolphin-overlay, odysseus
   let
     system = "x86_64-linux";
   in {
@@ -31,6 +33,7 @@
         {
           environment.systemPackages = [
             archon.packages.${system}.archon
+            raiderio-client.packages.${system}.raiderio-client
           ];
 
           ##nixpkgs.overlays = [

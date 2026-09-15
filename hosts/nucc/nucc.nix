@@ -1,3 +1,6 @@
+# THE NUCC
+# NUC13ANHi7 Full Arena Canyon
+# Intel Core i7-1360P, Intel NUC 13 Pro
 { config, pkgs, ... }:
 
 {

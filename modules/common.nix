@@ -132,6 +132,7 @@
     caligula # iso burning
     claude-code
     wf-recorder
+    #libreoffice
 
     # media
     vlc
@@ -201,6 +202,6 @@
     192.168.18.16 dlc.mitch.gg
   '';
 
-  networking.firewall.allowedTCPPorts = [ 53317 ]; # localsend
-  networking.firewall.allowedUDPPorts = [ 53317 ]; # localsend
+  networking.firewall.allowedTCPPorts = [ 53317 5173 8081 ]; # localsend
+  networking.firewall.allowedUDPPorts = [ 53317 5173 8081 ]; # localsend
 }
