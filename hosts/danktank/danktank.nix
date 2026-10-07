@@ -33,6 +33,12 @@
 
   # Latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  
+  fileSystems."/mnt/windows/DNA".options = [
+    "nofail"
+    "x-systemd.automount"
+    "x-systemd.device-timeout=5s"
+  ];
 
   ########################################
   # Networking

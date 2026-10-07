@@ -132,6 +132,7 @@
     caligula # iso burning
     claude-code
     wf-recorder
+    kdePackages.kcalc
     #libreoffice
 
     # media
